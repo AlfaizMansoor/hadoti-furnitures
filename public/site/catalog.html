@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Full Catalog | Hadoti Furnitures</title>
+  <meta name="description" content="Browse the complete Hadoti Furnitures catalog — solid wood sofas, beds, dining tables, chairs and storage, searchable and sortable in one place.">
+  <meta property="og:title" content="Full Catalog | Hadoti Furnitures">
+  <meta property="og:description" content="Every handcrafted solid wood piece we make, in one browsable catalog.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/site/index.html">
+      <strong>Hadoti</strong>
+      <span>Furnitures</span>
+    </a>
+
+    <div class="header-search">
+      <input id="search-input" type="search" placeholder="Search sofas, beds, tables, SKU..." autocomplete="off">
+      <div class="suggestions" id="search-suggestions"></div>
+    </div>
+
+    <nav class="header-actions">
+      <a href="/site/index.html" aria-label="Home" title="Home">&#8962;</a>
+      <a href="/site/catalog.html" aria-label="Catalog" title="Catalog">&#9638;</a>
+      <a href="/site/wishlist.html" class="always" aria-label="Wishlist" title="Wishlist">&#9825;<span class="count" data-wishlist-count>0</span></a>
+      <a href="/site/cart.html" class="always" aria-label="Cart" title="Cart">&#128722;<span class="count" data-cart-count>0</span></a>
+      <a href="/site/auth.html" data-account-link aria-label="Login" title="Login">&#9679;</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <h1>Full Catalog</h1>
+    <p>Every handcrafted piece we make, searchable and sortable in one place.</p>
+  </div>
+
+  <div class="catalog-banner">
+    <div class="catalog-banner-inner">
+      <span>&#10022;</span>
+      <span>Every piece is <strong>handcrafted solid wood</strong>, built in our own workshop with a <strong>1-year warranty</strong>.</span>
+    </div>
+  </div>
+
+  <section class="section" id="all-products" style="padding-top:8px">
+    <div class="category-nav" id="category-filter" style="margin-bottom:18px"></div>
+    <div class="toolbar">
+      <div class="alphabet" id="alphabet"></div>
+      <label class="sort-field">
+        <select id="sort-select" aria-label="Sort products">
+          <option value="featured">Featured</option>
+          <option value="az">Name: A to Z</option>
+          <option value="za">Name: Z to A</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="newest">Newest</option>
+          <option value="popular">Popular</option>
+        </select>
+      </label>
+    </div>
+
+    <p id="result-summary" style="margin:16px 0 0;color:var(--grey);font-size:14px"></p>
+
+    <div class="grid" data-grid="all" style="margin-top:24px"></div>
+  </section>
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<nav class="mobile-nav">
+  <a href="/site/index.html" aria-label="Home"><b>&#8962;</b></a>
+  <a href="/site/catalog.html" aria-label="Catalog"><b>&#9638;</b></a>
+  <a href="/site/wishlist.html" aria-label="Wishlist"><b>&#9825;</b></a>
+  <a href="/site/cart.html" aria-label="Cart"><b>&#128722;</b></a>
+  <a href="/site/auth.html" data-account-link aria-label="Login"><b>&#9679;</b></a>
+</nav>
+
+<script type="module" src="/site/js/home.js"></script>
+<script type="module" src="/site/js/site-info.js"></script>
+<script type="module" src="/site/js/mobile-nav.js"></script>
+</body>
+</html>

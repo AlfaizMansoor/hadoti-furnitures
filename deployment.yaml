@@ -1,0 +1,70 @@
+# Kubernetes manifest for the Hadoti Furnitures storefront.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hadoti-storefront
+  labels:
+    app: hadoti-storefront
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hadoti-storefront
+  template:
+    metadata:
+      labels:
+        app: hadoti-storefront
+    spec:
+      containers:
+        - name: storefront
+          image: hadoti-furnitures:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "3000"
+            - name: VITE_SUPABASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: hadoti-config
+                  key: supabase_url
+            - name: VITE_SUPABASE_PUBLISHABLE_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: hadoti-config
+                  key: supabase_publishable_key
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hadoti-storefront
+spec:
+  type: ClusterIP
+  selector:
+    app: hadoti-storefront
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000

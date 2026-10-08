@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Product | Hadoti Furnitures</title>
+  <meta name="description" content="Product details, specifications, pricing and availability for handcrafted solid wood furniture from Hadoti Furnitures.">
+  <meta property="og:title" content="Product | Hadoti Furnitures">
+  <meta property="og:description" content="Specifications, pricing and availability for handcrafted Hadoti furniture.">
+  <meta property="og:type" content="product">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/site/index.html">
+      <strong>Hadoti</strong>
+      <span>Furnitures</span>
+    </a>
+
+    <div class="header-search">
+      <input id="search-input" type="search" placeholder="Search sofas, beds, tables, SKU..." autocomplete="off">
+      <div class="suggestions" id="search-suggestions"></div>
+    </div>
+
+    <nav class="header-actions">
+      <a href="/site/index.html" aria-label="Home" title="Home">&#8962;</a>
+      <a href="/site/catalog.html" aria-label="Catalog" title="Catalog">&#9638;</a>
+      <a href="/site/wishlist.html" class="always" aria-label="Wishlist" title="Wishlist">&#9825;<span class="count" data-wishlist-count>0</span></a>
+      <a href="/site/cart.html" class="always" aria-label="Cart" title="Cart">&#128722;<span class="count" data-cart-count>0</span></a>
+      <a href="/site/auth.html" data-account-link aria-label="Login" title="Login">&#9679;</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="crumbs"><a href="/site/index.html" aria-label="Home" title="Home">&#8962;</a> / <span id="crumb-name">Product</span></p>
+  <div id="product-view"></div>
+
+  <section class="section" id="suggested-section" hidden>
+    <div class="section-head"><h2>Similar Products</h2><p>Other handcrafted pieces you may like alongside this one</p></div>
+    <div class="grid" data-grid="suggested"></div>
+  </section>
+
+  <section class="section" id="viewed-section" hidden>
+    <div class="section-head"><h2>Recently Viewed</h2></div>
+    <div class="grid" data-grid="viewed"></div>
+  </section>
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<nav class="mobile-nav">
+  <a href="/site/index.html" aria-label="Home"><b>&#8962;</b></a>
+  <a href="/site/catalog.html" aria-label="Catalog"><b>&#9638;</b></a>
+  <a href="/site/wishlist.html" aria-label="Wishlist"><b>&#9825;</b></a>
+  <a href="/site/cart.html" aria-label="Cart"><b>&#128722;</b></a>
+  <a href="/site/auth.html" data-account-link aria-label="Login"><b>&#9679;</b></a>
+</nav>
+
+<script type="module" src="/site/js/product.js"></script>
+<script type="module" src="/site/js/site-info.js"></script>
+<script type="module" src="/site/js/mobile-nav.js"></script>
+</body>
+</html>

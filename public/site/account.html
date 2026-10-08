@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Account | Hadoti Furnitures</title>
+  <meta name="description" content="Manage your Hadoti Furnitures profile, review your orders and update your contact details.">
+  <meta property="og:title" content="My Account | Hadoti Furnitures">
+  <meta property="og:description" content="Manage your Hadoti Furnitures profile and review your orders.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/site/index.html">
+      <strong>Hadoti</strong>
+      <span>Furnitures</span>
+    </a>
+
+    <nav class="header-actions">
+      <a href="/site/index.html" aria-label="Home" title="Home">&#8962;</a>
+      <a href="/site/catalog.html" aria-label="Catalog" title="Catalog">&#9638;</a>
+      <a href="/site/wishlist.html" class="always" aria-label="Wishlist" title="Wishlist">&#9825;<span class="count" data-wishlist-count>0</span></a>
+      <a href="/site/cart.html" class="always" aria-label="Cart" title="Cart">&#128722;<span class="count" data-cart-count>0</span></a>
+      <a href="/site/admin.html" id="admin-nav-link" hidden>Admin</a>
+      <a href="/site/account.html" data-account-link aria-label="Account" title="Account">&#9679;</a>
+
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <h1>My Account</h1>
+    <p id="account-subtitle">Your profile and order history.</p>
+  </div>
+
+  <div class="auth-layout">
+    <div class="auth-card">
+      <h3>Profile</h3>
+      <form class="form" id="profile-form">
+        <label>Full Name
+          <input type="text" name="fullName" required autocomplete="name">
+        </label>
+        <label>Mobile Number
+          <input type="tel" name="phone" required pattern="[0-9+ ]{10,15}" autocomplete="tel">
+        </label>
+        <button class="btn" type="submit">Save Changes</button>
+      </form>
+      <p class="form-message" id="profile-message"></p>
+      <button type="button" class="link-btn" id="logout-btn">Log out</button>
+    </div>
+
+    <div>
+      <h3>My Orders</h3>
+      <div id="orders-list"></div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<nav class="mobile-nav">
+  <a href="/site/index.html" aria-label="Home"><b>&#8962;</b></a>
+  <a href="/site/catalog.html" aria-label="Catalog"><b>&#9638;</b></a>
+  <a href="/site/wishlist.html" aria-label="Wishlist"><b>&#9825;</b></a>
+  <a href="/site/cart.html" aria-label="Cart"><b>&#128722;</b></a>
+  <a href="/site/account.html" data-account-link aria-label="Account"><b>&#9679;</b></a>
+</nav>
+
+<script type="module" src="/site/js/account.js"></script>
+<script type="module" src="/site/js/site-info.js"></script>
+<script type="module" src="/site/js/mobile-nav.js"></script>
+</body>
+</html>

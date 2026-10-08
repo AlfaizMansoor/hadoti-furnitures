@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Order Management | Hadoti Furnitures</title>
+  <meta name="description" content="Administrator area listing every Hadoti Furnitures order with products, quantities, totals, payment and delivery status.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/site/index.html">
+      <strong>Hadoti</strong>
+      <span>Furnitures</span>
+    </a>
+
+    <nav class="header-actions">
+      <a href="/site/index.html">Storefront</a>
+      <a href="/site/admin.html">Products</a>
+      <a href="/site/account.html">Account</a>
+      <button class="link-btn" id="admin-signout" type="button">Sign out</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <span class="eyebrow">Administration</span>
+    <h1>Order Management</h1>
+    <p>Every placed order with items, quantities, totals, payment and delivery status.</p>
+  </div>
+
+  <p class="form-message" id="admin-status">Checking your access...</p>
+
+  <div id="admin-gate" hidden>
+    <div class="auth-card" style="max-width:420px">
+      <h3>Administrator sign in</h3>
+      <form class="form" id="admin-login">
+        <label>Email<input type="email" name="email" required autocomplete="email"></label>
+        <label>Password<input type="password" name="password" required autocomplete="current-password"></label>
+        <button class="btn" type="submit">Sign in</button>
+        <button type="button" class="link-btn" id="forgot-btn">Forgot your password?</button>
+      </form>
+      <form class="form" id="reset-otp-form" hidden>
+        <p class="note">Enter the 6-digit code we emailed you, and choose a new password.</p>
+        <label>6-digit code<input type="text" name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required autocomplete="one-time-code"></label>
+        <label>New password<input type="password" name="newPassword" required minlength="6" autocomplete="new-password"></label>
+        <button class="btn" type="submit">Set New Password</button>
+        <button type="button" class="link-btn" id="reset-otp-cancel">Back to sign in</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="orders-panel" hidden>
+    <div class="order-stats" id="order-stats"></div>
+
+    <div class="order-filters">
+      <label>Status
+        <select id="status-filter">
+          <option value="">All orders</option>
+          <option value="placed">Placed</option>
+          <option value="confirmed">Confirmed</option>
+          <option value="in_production">In production</option>
+          <option value="dispatched">Dispatched</option>
+          <option value="delivered">Delivered</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </label>
+      <label>Search
+        <input type="search" id="order-search" placeholder="Order number, customer or product">
+      </label>
+      <button class="btn btn-ghost" id="refresh-orders" type="button">Refresh</button>
+    </div>
+
+    <div id="orders-list"></div>
+  </div>
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<script type="module" src="/site/js/admin-orders.js"></script>
+<script type="module" src="/site/js/password-toggle.js"></script>
+<script type="module" src="/site/js/site-info.js"></script>
+</body>
+</html>

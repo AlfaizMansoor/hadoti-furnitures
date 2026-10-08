@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout | Hadoti Furnitures</title>
+  <meta name="description" content="Confirm your delivery address and place your Hadoti Furnitures order for handcrafted solid wood furniture.">
+  <meta property="og:title" content="Checkout | Hadoti Furnitures">
+  <meta property="og:description" content="Confirm your delivery details and place your furniture order.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- The Razorpay window is loaded on demand by checkout.js; warming the
+       connection here keeps it quick to open. -->
+  <link rel="preconnect" href="https://checkout.razorpay.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/site/index.html">
+      <strong>Hadoti</strong>
+      <span>Furnitures</span>
+    </a>
+
+    <nav class="header-actions">
+      <a href="/site/index.html" aria-label="Home" title="Home">&#8962;</a>
+      <a href="/site/catalog.html" aria-label="Catalog" title="Catalog">&#9638;</a>
+      <a href="/site/wishlist.html" class="always" aria-label="Wishlist" title="Wishlist">&#9825;<span class="count" data-wishlist-count>0</span></a>
+      <a href="/site/cart.html" class="always" aria-label="Cart" title="Cart">&#128722;<span class="count" data-cart-count>0</span></a>
+      <a href="/site/auth.html" data-account-link aria-label="Login" title="Login">&#9679;</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <h1>Checkout</h1>
+    <p>Confirm your delivery details and place your order.</p>
+  </div>
+
+  <div class="cart-layout">
+    <div class="auth-card">
+      <form class="form" id="checkout-form">
+        <label>Full Name
+          <input type="text" name="contactName" required autocomplete="name">
+        </label>
+        <label>Mobile Number
+          <input type="tel" name="contactPhone" required pattern="[0-9+ ]{10,15}" autocomplete="tel">
+        </label>
+        <label>Email Address
+          <input type="email" name="contactEmail" required autocomplete="email">
+        </label>
+        <label>House / Flat / Building
+          <input type="text" name="addressLine1" required autocomplete="address-line1">
+        </label>
+        <label>Street / Area
+          <input type="text" name="addressLine2" required autocomplete="address-line2">
+        </label>
+        <label>Landmark (optional)
+          <input type="text" name="landmark" autocomplete="off">
+        </label>
+        <div class="form-row">
+          <label>City
+            <input type="text" name="city" required autocomplete="address-level2">
+          </label>
+          <label>State
+            <input type="text" name="state" required autocomplete="address-level1">
+          </label>
+          <label>PIN Code
+            <input type="text" name="pincode" required pattern="[0-9]{6}" autocomplete="postal-code">
+          </label>
+        </div>
+        <label>Delivery Instructions (optional)
+          <textarea name="notes" rows="3"></textarea>
+        </label>
+        <fieldset class="pay-methods" id="payment-methods">
+          <legend>Payment Method</legend>
+        </fieldset>
+        <div class="pay-details" id="payment-details"></div>
+        <button class="btn" type="submit" id="place-order">Proceed to Payment</button>
+      </form>
+      <p class="form-message" id="checkout-message"></p>
+    </div>
+
+    <aside class="summary" id="checkout-summary"></aside>
+  </div>
+</main>
+
+<!-- Shown right after a Razorpay payment is verified. Manual methods (UPI /
+     bank transfer) go straight to the order page instead, since those are
+     not verified yet at this point. -->
+<div class="modal-overlay" id="success-modal" hidden>
+  <div class="modal-card">
+    <svg class="check-circle" viewBox="0 0 52 52">
+      <circle class="check-circle-ring" cx="26" cy="26" r="24" fill="none"></circle>
+      <path class="check-circle-tick" fill="none" d="M14 27l7 7 16-16"></path>
+    </svg>
+    <h2>Order Confirmed!</h2>
+    <p id="success-order-text"></p>
+    <button class="btn" type="button" id="success-continue">View My Order</button>
+  </div>
+</div>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<nav class="mobile-nav">
+  <a href="/site/index.html" aria-label="Home"><b>&#8962;</b></a>
+  <a href="/site/catalog.html" aria-label="Catalog"><b>&#9638;</b></a>
+  <a href="/site/wishlist.html" aria-label="Wishlist"><b>&#9825;</b></a>
+  <a href="/site/cart.html" aria-label="Cart"><b>&#128722;</b></a>
+  <a href="/site/auth.html" data-account-link aria-label="Login"><b>&#9679;</b></a>
+</nav>
+
+<script type="module" src="/site/js/checkout.js"></script>
+<script type="module" src="/site/js/site-info.js"></script>
+<script type="module" src="/site/js/mobile-nav.js"></script>
+</body>
+</html>

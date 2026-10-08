@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Cart | Hadoti Furnitures</title>
+  <meta name="description" content="Review the solid wood furniture in your Hadoti Furnitures cart, adjust quantities and check your order total before checkout.">
+  <meta property="og:title" content="Your Cart | Hadoti Furnitures">
+  <meta property="og:description" content="Review your selected furniture and order total before checkout.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/site/index.html">
+      <strong>Hadoti</strong>
+      <span>Furnitures</span>
+    </a>
+
+    <nav class="header-actions">
+      <a href="/site/index.html" aria-label="Home" title="Home">&#8962;</a>
+      <a href="/site/catalog.html" aria-label="Catalog" title="Catalog">&#9638;</a>
+      <a href="/site/wishlist.html" class="always" aria-label="Wishlist" title="Wishlist">&#9825;<span class="count" data-wishlist-count>0</span></a>
+      <a href="/site/cart.html" class="always" aria-label="Cart" title="Cart">&#128722;<span class="count" data-cart-count>0</span></a>
+      <a href="/site/auth.html" data-account-link aria-label="Login" title="Login">&#9679;</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <h1>Your Cart</h1>
+    <p>Adjust quantities, remove pieces or continue shopping.</p>
+  </div>
+
+  <div class="cart-layout">
+    <div id="cart-lines"></div>
+    <aside class="summary" id="cart-summary"></aside>
+  </div>
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+<nav class="mobile-nav">
+  <a href="/site/index.html" aria-label="Home"><b>&#8962;</b></a>
+  <a href="/site/catalog.html" aria-label="Catalog"><b>&#9638;</b></a>
+  <a href="/site/wishlist.html" aria-label="Wishlist"><b>&#9825;</b></a>
+  <a href="/site/cart.html" aria-label="Cart"><b>&#128722;</b></a>
+  <a href="/site/auth.html" data-account-link aria-label="Login"><b>&#9679;</b></a>
+</nav>
+
+<script type="module" src="/site/js/cart.js"></script>
+<script type="module" src="/site/js/site-info.js"></script>
+<script type="module" src="/site/js/mobile-nav.js"></script>
+</body>
+</html>

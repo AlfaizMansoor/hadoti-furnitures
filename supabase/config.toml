@@ -1,0 +1,13 @@
+project_id = "fraszjygdnrrqhjuoscj"
+
+# Called by the signed-in customer, so the default JWT check applies.
+[functions.create-payment-order]
+verify_jwt = true
+
+[functions.verify-payment]
+verify_jwt = true
+
+# Called by Razorpay's servers, which cannot hold a Supabase JWT. It
+# authenticates every request with the webhook HMAC signature instead.
+[functions.razorpay-webhook]
+verify_jwt = false
