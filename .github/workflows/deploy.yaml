@@ -1,43 +1,53 @@
-name: Portfolio
+name: Deploy Static Content to Pages
 
 on:
-  workflow_dispatch: 
   push:
-    branches:
-      - main
+    branches: 
+        - main # Change to "master" if your default branch is named master
+  workflow_dispatch:
 
 permissions:
-    pages: write
-    id-token: write
-    contents: read
-    
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
-   deploy:
-       runs-on: ubuntu-latest
-       environment:
-           name: github-pages
-           url: ${{ steps.deployment.outputs.page_url }}
-       steps:
-            # get access to the repository
-            # clones or checks out the code where thid workflow is written
-            # STEP 1
-            - name: Checkout code
-              uses: actions/checkout@v4
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-            # Setup github pages
-            # STEP 2
-            - name: Setup Github pages
-              uses: actions/configure-pages@v4
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
 
-            # Static code artifacts
-            # STEP 3
-            - name: upload static files
-              uses: actions/upload-pages-artifact@v4
-              with:
-                path: /public/site/index.html
-                         
-            # Deploy to github pages
-            # STEP 4
-            - name: Deploy to github pages
-              id: deployment
-              uses: actions/deploy-pages@v4
+      # Optional: Uncomment the lines below if you are using an npm build framework (Vite, React, etc.)
+      # - name: Install Dependencies & Build
+      #   run: |
+      #     npm ci
+      #     npm run build
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # FIXED PATH: Points to the directory containing your static files.
+          # If your files are in the repository root, change this to "."
+          # If they are inside a folder named public, change this to "public"
+          path: "." 
+
+  # Continuous Deployment Job
+  deploy-pages:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+    
