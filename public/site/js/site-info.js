@@ -15,7 +15,7 @@ import {
 } from "./business.js";
 import "./session.js";
 import "./motion.js";
-import "./promo.js";
+// import "./promo.js";
 
 // Minimal, currentColor line icons so they inherit the theme automatically.
 const SOCIAL_ICONS = {
