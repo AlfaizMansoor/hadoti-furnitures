@@ -1,15 +1,19 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
-  plugins: [
-    react(),
-    tsconfigPaths()
-  ],
-  // 🔑 CRITICAL: This ensures your generated CSS/JS prefixes load /hadoti-furnitures/ correctly
+  plugins: [react()],
+  
+  // 🔑 FIX 1: Tell Vite that your source files live in public/site
+  root: 'public/site',
+  
+  // 🔑 FIX 2: Prefix paths correctly for GitHub Pages routing
   base: '/hadoti-furnitures/', 
+  
   build: {
-    outDir: 'dist', // Standard static production directory output
+    // Tells Vite to output 'dist' relative to your main workspace root directory
+    outDir: '../../dist', 
+    emptyOutDir: true
   }
 })
+
