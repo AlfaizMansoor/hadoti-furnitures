@@ -1,15 +1,23 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve, extname, basename } from 'path'
-import { globSync } from 'glob'
+import { readdirSync } from 'fs'
 
-// 🔑 Automatically find all 18 HTML pages inside public/site
-const htmlFiles = globSync('public/site/**/*.html').reduce((entries, file) => {
-  // Turn "public/site/about.html" into an entry key name like "about"
-  const name = basename(file, extname(file))
-  entries[name] = resolve(__dirname, file)
-  return entries
-}, {})
+// 🔑 Clean native scanner to find all 18 HTML files inside public/site
+const siteDir = resolve(__dirname, 'public/site')
+const htmlFiles: Record<string, string> = {}
+
+try {
+  const files = readdirSync(siteDir)
+  files.forEach(file => {
+    if (extname(file) === '.html') {
+      const name = basename(file, '.html')
+      htmlFiles[name] = resolve(siteDir, file)
+    }
+  })
+} catch (err) {
+  console.error("Error reading public/site directory:", err)
+}
 
 export default defineConfig({
   plugins: [react()],
@@ -22,7 +30,7 @@ export default defineConfig({
     outDir: '../../dist', 
     emptyOutDir: true,
     
-    // Pass the automatically generated list of 18 pages to the compiler
+    // Automatically passes your 18 pages to the bundler engine
     rollupOptions: {
       input: htmlFiles
     }
