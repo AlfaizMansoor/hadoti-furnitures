@@ -1,0 +1,40 @@
+name: Portfolio
+
+on:
+  workflow_dispatch: 
+
+permissions:
+    pages: write
+    id-token: write
+    contents: read
+    
+jobs:
+   deploy:
+       runs-on: ubuntu-latest
+       environment:
+           name: github-pages
+           url: ${{ steps.deployment.outputs.page_url }}
+       steps:
+            # get access to the repository
+            # clones or checks out the code where thid workflow is written
+            # STEP 1
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            # Setup github pages
+            # STEP 2
+            - name: Setup Github pages
+              uses: actions/configure-pages@v4
+
+            # Static code artifacts
+            # STEP 3
+            - name: upload static files
+              uses: actions/upload-pages-artifact@v4
+              with:
+                path: .
+                         
+            # Deploy to github pages
+            # STEP 4
+            - name: Deploy to github pages
+              id: deployment
+              uses: actions/deploy-pages@v4
