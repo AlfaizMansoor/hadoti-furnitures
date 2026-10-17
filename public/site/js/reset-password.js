@@ -2,7 +2,7 @@
 // session.js. Supabase appends the recovery tokens to the URL as a hash
 // fragment, e.g. #access_token=...&refresh_token=...&type=recovery, rather
 // than a query string, so they never hit the server logs.
-import { completePasswordReset } from "./session.js";
+// import { completePasswordReset } from "./session.js";
 
 const form = document.getElementById("reset-form");
 const message = document.getElementById("reset-message");
