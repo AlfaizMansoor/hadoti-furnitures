@@ -1,53 +1,62 @@
-name: Deploy Static Content to Pages
+name: Build and Deploy to GitHub Pages
 
 on:
   push:
     branches: 
-        - main # Change to "master" if your default branch is named master
+        - main # Change this to "master" if your repository's default branch is named master
   workflow_dispatch:
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build-and-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js Runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Project Dependencies
+        # Using --legacy-peer-deps prevents any legacy plugin resolution conflicts
+        run: npm ci --legacy-peer-deps
+
+      - name: Compile Production Build
+        # Generates clean, compiled client-side static HTML/CSS/JS inside the 'dist' folder
+        run: |
+            npm i
+            npm run build
+
+      - name: Setup GitHub Pages Infrastructure
+        uses: actions/configure-pages@v5
+
+      - name: Upload Build Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Points directly to your compiled Vite distribution output folder
+          path: "dist"
+
+  deploy-site:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    needs: build-and-package
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup GitHub Pages
-        uses: actions/configure-pages@v5
-
-      # Optional: Uncomment the lines below if you are using an npm build framework (Vite, React, etc.)
-      # - name: Install Dependencies & Build
-      #   run: |
-      #     npm ci
-      #     npm run build
-
-      - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # FIXED PATH: Points to the directory containing your static files.
-          # If your files are in the repository root, change this to "."
-          # If they are inside a folder named public, change this to "public"
-          path: "public/site" 
-
-  # Continuous Deployment Job
-  deploy-pages:
-    needs: deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy Live Assets to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-    

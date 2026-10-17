@@ -38,6 +38,9 @@ function selectTab(name) {
 
 tabs.forEach((tab) => tab.addEventListener("click", () => selectTab(tab.dataset.tab)));
 
+// Lets links such as /site/auth.html?tab=register open the Sign Up tab directly.
+if (new URLSearchParams(window.location.search).get("tab") === "register") selectTab("register");
+
 loginForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const data = new FormData(loginForm);
