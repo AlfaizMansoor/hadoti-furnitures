@@ -56,3 +56,9 @@ if (tokens.error) {
     }
   });
 }
+
+// Add this at the very bottom of public/site/js/session.js:
+export function completePasswordReset() {
+    console.log("Password reset placeholder function called.");
+    return true;
+}
