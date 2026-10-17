@@ -1,0 +1,310 @@
+/* =============================================================================
+   Promotional system: festival popup, floating offer, sign-up popup.
+   Loaded on demand by /site/js/promo.js, so style.css is not touched.
+
+   The offer graphic is displayed exactly as supplied: no colour overlays, no
+   filters on the image itself, no cropping. Sizes are computed from the image's
+   own aspect ratio (--ratio, set by promo.js) so any shape fits: landscape,
+   portrait or square.
+   ============================================================================= */
+
+.promo-backdrop {
+  --popup-h: 78vh;
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right))
+    max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  background: rgba(24, 20, 16, 0.62);
+  overflow: hidden;
+  overscroll-behavior: contain;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+@supports (height: 1dvh) {
+  .promo-backdrop {
+    --popup-h: 78dvh;
+  }
+}
+
+.promo-backdrop.is-open {
+  opacity: 1;
+}
+
+.promo-backdrop.is-closing {
+  opacity: 0;
+}
+
+.promo-dialog {
+  position: relative;
+  max-width: calc(100vw - 48px); /* leaves room for the close button */
+  opacity: 0;
+  transform: translateY(14px) scale(0.96);
+  transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease;
+}
+
+.promo-backdrop.is-open .promo-dialog {
+  opacity: 1;
+  transform: none;
+}
+
+.promo-backdrop.is-closing .promo-dialog {
+  opacity: 0;
+  transform: translateY(8px) scale(0.97);
+}
+
+/* Close button: a real button, separate from the graphic. */
+.promo-close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #26211c;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.promo-close:hover {
+  background: #000;
+  transform: scale(1.06);
+}
+
+.promo-close:focus-visible,
+.promo-offer-link:focus-visible,
+.promo-float-close:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(38, 33, 28, 0.7);
+}
+
+/* ---- Festival popup image ------------------------------------------------ */
+.promo-offer-media {
+  display: block;
+  line-height: 0;
+  /* Never wider than: 920px, the screen (minus close-button room), what fits
+     the height at this aspect ratio, or the image's own pixel width. */
+  width: min(920px, calc(100vw - 48px), calc(var(--popup-h) * var(--ratio, 1)), calc(var(--nw, 920) * 1px));
+}
+
+.promo-offer-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.38)); /* outside the graphic only */
+}
+
+a.promo-offer-media {
+  cursor: pointer;
+}
+
+/* ---- Sign-up popup ------------------------------------------------------- */
+.promo-dialog--signup {
+  width: min(420px, calc(100vw - 48px));
+  padding: 34px 26px 26px;
+  border-radius: 20px;
+  background: #fff;
+  color: #26211c;
+  text-align: center;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
+}
+
+.promo-signup-kicker {
+  margin: 0 0 6px;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--walnut, #d9631d);
+}
+
+.promo-signup-title {
+  margin: 0 0 10px;
+  font-family: var(--font-title, Georgia, serif);
+  font-size: 28px;
+  line-height: 1.15;
+}
+
+.promo-signup-text {
+  margin: 0 0 22px;
+  color: var(--grey, #6c6660);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.promo-signup-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.promo-signup-actions .btn {
+  width: 100%;
+  min-height: 46px;
+}
+
+/* ---- Floating offer (Home page) ------------------------------------------ */
+.promo-float {
+  position: fixed;
+  left: 14px;
+  bottom: 24px;
+  z-index: 45; /* above page content, below the mobile nav / popups */
+  /* Tight to the image: width comes from the aspect ratio, never wider than
+     160px / 36vw, and never taller than ~190px. */
+  width: min(160px, 36vw, calc(190px * var(--ratio, 1)));
+  opacity: 0;
+  transform: translateY(18px) scale(0.92);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.promo-float.is-wide {
+  width: min(240px, 56vw, calc(130px * var(--ratio, 1)));
+}
+
+.promo-float.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.promo-float.is-hiding {
+  opacity: 0;
+  transform: translateY(18px) scale(0.92);
+}
+
+.promo-float-media {
+  display: block;
+  line-height: 0;
+}
+
+a.promo-float-media {
+  cursor: pointer;
+}
+
+.promo-float-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+}
+
+.promo-float-close {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #26211c;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Phones: sit above the fixed bottom navigation bar and the home indicator. */
+@media (max-width: 720px) {
+  .promo-float {
+    left: 12px;
+    bottom: calc(78px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .promo-backdrop,
+  .promo-dialog,
+  .promo-float,
+  .promo-close {
+    transition: none !important;
+  }
+}
+
+/* ---- Permanent offer banner (Home page) ----------------------------------- */
+/* Part of the page, always visible, no close button. The graphic is never
+   cropped or stretched: its width comes from its own aspect ratio, capped so a
+   tall (portrait) graphic can't take over the whole screen. */
+.offer-banner {
+  padding: 28px 0 4px;
+}
+
+.offer-banner-media {
+  --banner-h: 560px;
+  display: block;
+  line-height: 0;
+  margin: 0 auto;
+  width: min(100%, calc(var(--banner-h) * var(--ratio, 1)), calc(var(--nw, 1180) * 1px));
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.offer-banner-media.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.offer-banner-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+  filter: drop-shadow(0 14px 28px rgba(38, 33, 28, 0.18)); /* outside the graphic only */
+}
+
+a.offer-banner-media {
+  cursor: pointer;
+}
+
+a.offer-banner-media:focus-visible {
+  outline: 3px solid var(--walnut, #d9631d);
+  outline-offset: 4px;
+}
+
+@media (max-width: 720px) {
+  .offer-banner {
+    padding-top: 20px;
+  }
+
+  .offer-banner-media {
+    --banner-h: 520px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .offer-banner-media {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
