@@ -40,7 +40,7 @@ jobs:
           # FIXED PATH: Points to the directory containing your static files.
           # If your files are in the repository root, change this to "."
           # If they are inside a folder named public, change this to "public"
-          path: "." 
+          path: "public" 
 
   # Continuous Deployment Job
   deploy-pages:
